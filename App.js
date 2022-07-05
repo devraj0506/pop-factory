@@ -2,27 +2,20 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Admin from './Components/Admin/Admin.jsx'
-import Login from './Components/Login.jsx'
-import {NavigationContainer} from '@react-navigation/native'
-import {createStackNavigator} from '@react-navigation/stack'
+import Navigation from './Components/Navigation.js'
 
-const Stack = createStackNavigator();
+import Login from './Components/Login'
+
+import {NavigationContainer} from '@react-navigation/native'
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import {AuthProvider} from './Components/Context/AuthContext';
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <>
-    <View style={styles.container}>
-      
-      <Login />
-      <StatusBar style="auto" />
-    </View>
-    
-    <NavigationContainer>
-    <Stack.Navigator>
-    <Stavk.screen name="Admin" component={Admin} />
-    </Stack.Navigator>
-    </NavigationContainer>
-    </>
+<AuthProvider>
+<Navigation />
+</AuthProvider>
   );
 }
 

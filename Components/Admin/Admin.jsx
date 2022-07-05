@@ -7,3 +7,5 @@ const Admin=()=>{
     <Text>This is admin panel</Text>
     )
 }
+
+export default Admin
