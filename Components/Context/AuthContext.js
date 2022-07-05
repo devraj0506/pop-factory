@@ -7,12 +7,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
   
  export const AuthProvider = ({children}) => { 
    const [userInfo, setUserInfo] = useState({}); 
-   const [isLoading, setIsLoading] = useState(false); 
+const [Loading, setLoading] = useState(false) 
    const [splashLoading, setSplashLoading] = useState(false); 
   
   
-   const login = (email, password) => { 
-     setIsLoading(true); 
+   const login = (email, password) => {
+     console.log("started")
+     console.log(Loading)
+setLoading(true)
+     console.log(Loading)
   
      axios 
        .post("https://factory-fuel.herokuapp.com/admin/login", { 
@@ -23,18 +26,24 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
          let userInfo = res.data; 
          console.log(userInfo); 
          if(userInfo.success==true){
-           alert("login success")
+           alert("you ae logged in")
          }
          setUserInfo(userInfo); 
          AsyncStorage.setItem('userInfo', JSON.stringify(userInfo)); 
-setIsLoading(false); 
+setLoading(false); 
        }) 
        .catch(res => { 
          console.log(`login error ${res}`); 
          alert(res)
- setIsLoading(false); 
+ setLoading(true); 
        }); 
-   }; 
+   };
+   
+   const Logout=()=>{
+     AsyncStorage.removeItem('userInfo')
+     setUserInfo({})
+     console.log("Logged out")
+   }
   
   
    const isLoggedIn = async () => { 
@@ -62,10 +71,11 @@ setIsLoading(false);
    return ( 
  <AuthContext.Provider 
        value={{ 
-         isLoading, 
+         Loading, 
          userInfo,
          setUserInfo,
-         splashLoading, 
+         splashLoading,
+         Logout,
          login, 
        }}> 
  {children} 

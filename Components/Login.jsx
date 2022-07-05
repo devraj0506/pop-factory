@@ -15,11 +15,11 @@ import React, {useContext, useState} from 'react';
 const Login = ({navigation}) => { 
    const [email, setEmail] = useState(null); 
    const [password, setPassword] = useState(null); 
-   const {isLoading, login} = useContext(AuthContext); 
+   const {Loading, login} = useContext(AuthContext); 
   
    return (
  <>
- <Spinner  visible={isLoading}/> 
+ <Spinner  visible={Loading}/> 
  <TextInput 
  value={email} 
  placeholder="Enter email" 

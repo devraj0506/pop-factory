@@ -6,7 +6,9 @@ import React, {useContext} from 'react';
  import Admin from './Admin/Admin.jsx'; 
  import Login from './Login'; 
  import {AuthContext} from './Context/AuthContext'; 
- 
+ import Diesel from './Diesel/Diesel'
+ import Factory from './Factory/Factory'
+ import Vehicle from './Vehicle/Vehicle'
   
  const Stack = createNativeStackNavigator(); 
   
@@ -33,6 +35,15 @@ import React, {useContext} from 'react';
  <Stack.Screen 
  name="Admin" 
  component={Admin} />
+ <Stack.Screen 
+ name="Diesel" 
+ component={Diesel} />
+ <Stack.Screen 
+ name="Factory" 
+ component={Factory} />
+ <Stack.Screen 
+ name="Vehicle" 
+ component={Vehicle} />
  </>
  ):( 
 <>
