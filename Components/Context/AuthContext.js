@@ -23,7 +23,9 @@ setLoading(true)
          password, 
        }) 
        .then(res => { 
-         let userInfo = res.data; 
+         let userInfo =res.data; 
+        
+         
          console.log(userInfo); 
          if(userInfo.success==true){
            alert("you ae logged in")

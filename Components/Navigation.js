@@ -29,12 +29,15 @@ import React, {useContext} from 'react';
   shownav();
    return ( 
  <NavigationContainer> 
- <Stack.Navigator> 
+ <Stack.Navigator screenOptions={{
+    headerShown: false
+  }}> 
  {userInfo.success==true ? (
  <>
  <Stack.Screen 
  name="Admin" 
- component={Admin} />
+ component={Admin} 
+ />
  <Stack.Screen 
  name="Diesel" 
  component={Diesel} />

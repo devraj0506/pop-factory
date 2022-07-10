@@ -1,9 +1,10 @@
 import React from 'react'
 import {Text} from 'react-native'
 
-const Factory=()=>{
+const Factory=({route, navigation})=>{
+    const {id}=route.params
   return(
-    <Text>This is Factory section</Text>
+    <Text>id: {id}</Text>
     )
 }
 
