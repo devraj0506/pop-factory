@@ -1,75 +1,38 @@
-
-// import React, {useContext, useState} from 'react'; 
-// import { 
-//   Button, 
-//   Text, 
-//   TextInput, 
-//   TouchableOpacity, 
-//   View, 
-//   StyleSheet, 
-// } from 'react-native'; 
-// import Spinner from 'react-native-loading-spinner-overlay'; 
-// import {AuthContext} from './Context/AuthContext';
-
-
-// const Login = ({navigation}) => { 
-//   const [email, setEmail] = useState(null); 
-//   const [password, setPassword] = useState(null); 
-//   const {Loading, login} = useContext(AuthContext); 
-  
-//   return (
-// <>
-// <Spinner  visible={Loading}/> 
-// <TextInput 
-// value={email} 
-// placeholder="Enter email" 
-// onChangeText={text => setEmail(text)} 
-// /> 
-// <TextInput 
-            
-//           value={password} 
-//           placeholder="Enter password" 
-//           onChangeText={text => setPassword(text)} 
-//           secureTextEntry 
-// /> 
-// <Button 
-//           title="Login" 
-//           onPress={() => { 
-//             login(email, password)
-//           }} 
-// /> 
-// </>
-// ); 
-// };
- 
-
-            // <Text style={styles.Txt035}>Password</Text>
- 
-
-// export default Login
-            // <Text style={styles.Txt035}>User Name</Text>
-
-          // <Text style={styles.Txt417}>Submit</Text>
-
 import React,{useState,useContext} from "react"
-import { StyleSheet, TextInput, Image, Text, View, ImageBackground, Button, Pressable } from "react-native"
+import { StyleSheet, TextInput, Image, Text, View, ImageBackground, Button, Pressable, KeyboardAvoidingView, ScrollView, ActivityIndicator, Modal, TouchableHighlight } from "react-native"
  import Spinner from 'react-native-loading-spinner-overlay'; 
 import {AuthContext} from './Context/AuthContext';
+import axios from "axios"
 
 
 export default function Login() {
   
   const [email, setEmail] = useState(null); 
    const [password, setPassword] = useState(null); 
-   const {Loading,login} = useContext(AuthContext); 
-  
-  
+   
+   const [userInfo,setUserInfo] = useState();
+   const {Loading,login, latestValue} = useContext(AuthContext); 
+   
+   
+ 
+  console.log(`in login latest value is ${latestValue.current}`)
   return (
+  <>
+    <Modal
+        animationType="slide"
+        transparent={true}
+        visible={latestValue.current}
+    
+      >
+ <Spinner visible={true} />
+ </Modal>
    
+    <ScrollView>
+    <View>
     <View style={styles.LoginInScreen}>
-    <Spinner  visible={Loading}/> 
       <View style={styles.Frame36}>
-        <Image
+       
+       <Image
           style={
             styles.IllustrationLeisureSocialMeia_RelaxWorkLaptopComputerClockDeadline
           }
@@ -77,10 +40,12 @@ export default function Login() {
             uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/fkl9gi4877-177%3A27?alt=media&token=f129dc8d-7802-4bc3-ab56-c5d36928c02b",
           }}
         />
+       
         <View style={styles.Frame6}>
           <Text style={styles.Txt868}>WELCOME TO APP</Text>
         </View>
          
+        
         <View style={styles.Frame35}>
           <View style={styles.InputField}>
             <TextInput 
@@ -100,21 +65,25 @@ onChangeText={text => setEmail(text)}
           </View>
           </View>
         </View>
+        
         <View style={styles.Frame3}>
-          <Pressable 
+          <TouchableHighlight 
           
           style={styles.Frame3}
-           onPress={() => { 
+           onPress={()=>{
              login(email, password)
-           }} 
+           }
+        } 
  >
  <Text style={styles.Txt417}>Login</Text>
- </Pressable>
+ </TouchableHighlight>
         </View>
         
       </View>
     </View>
-    
+    </View>
+    </ScrollView>
+   </>
   )
 }
 
@@ -134,6 +103,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1
+  },
+  maincont: {
+    flex: 1,
+    justifyContent: "center"
   },
   Frame36: {
     display: "flex",
@@ -155,7 +128,6 @@ const styles = StyleSheet.create({
   },
   Txt868: {
     fontSize: 24,
-    fontFamily: "Archivo, sans-serif",
     fontWeight: "700",
     lineHeight: 32,
     letterSpacing: -0.48,
@@ -182,7 +154,6 @@ const styles = StyleSheet.create({
   },
   Txt035: {
     fontSize: 12,
-    fontFamily: "Inter, sans-serif",
     fontWeight: "600",
     lineHeight: 16,
     letterSpacing: -0.24,
@@ -200,7 +171,6 @@ const styles = StyleSheet.create({
   },
   Txt035: {
     fontSize: 12,
-    fontFamily: "Inter, sans-serif",
     fontWeight: "600",
     lineHeight: 16,
     letterSpacing: -0.24,
@@ -225,7 +195,6 @@ const styles = StyleSheet.create({
   },
   Txt417: {
     fontSize: 14,
-    fontFamily: "Inter, sans-serif",
     fontWeight: "600",
     lineHeight: 24,
     color: "rgba(255, 255, 255, 1)",

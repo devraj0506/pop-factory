@@ -1,36 +1,12 @@
-// import React,{useContext} from 'react'
-// import {Text,Button} from 'react-native'
-// import {AuthContext} from '../Context/AuthContext'; 
-
-// const Admin=({navigation})=>{
-//     const {Logout} = useContext(AuthContext)
-//     const con=()=>{
-//       console.log(document.cookies)
-//     }
-//   return(
-//     <>
-//     <Text>This is admin panel</Text>
-//     <Button title="logout" onPress={Logout} />
-//     <Button title="Diesel Pump" onPress={()=>navigation.navigate('Diesel')} />
-//     <Button title="Factory" onPress={()=>navigation.navigate('Factory', {id:"abcg123"})} />
-//     <Button title="Vehicle" onPress={()=>navigation.navigate('Vehicle')} />
- 
-//     </>
-//     )
-// }
-
-// export default Admin
-
-
-
 import React,{useContext} from "react"
-import { StyleSheet, Image, Text, View, ImageBackground, Button, Pressable } from "react-native"
+import { StyleSheet, Image, Text, View, ImageBackground, Button, Pressable, ScrollView } from "react-native"
 import {AuthContext} from '../Context/AuthContext'; 
 
 
 export default function WelcomePageAdmin({navigation}) {
   const {Logout} = useContext(AuthContext)
   return (
+    <ScrollView>
     <View style={styles.WelcomePageAdmin}>
     <Button title="logout" onPress={Logout} />
       <View style={styles.Group422}>
@@ -58,6 +34,7 @@ export default function WelcomePageAdmin({navigation}) {
         </View>
       </View>
     </View>
+    </ScrollView>
   )
 }
 
@@ -95,7 +72,6 @@ const styles = StyleSheet.create({
   },
   Txt827: {
     fontSize: 24,
-    fontFamily: "Archivo, sans-serif",
     fontWeight: "700",
     lineHeight: 32,
     letterSpacing: -0.48,
@@ -128,7 +104,6 @@ const styles = StyleSheet.create({
   },
   Txt605: {
     fontSize: 14,
-    fontFamily: "Inter, sans-serif",
     fontWeight: "600",
     lineHeight: 24,
     color: "rgba(255, 255, 255, 1)",
@@ -154,7 +129,6 @@ const styles = StyleSheet.create({
   },
   Txt605: {
     fontSize: 14,
-    fontFamily: "Inter, sans-serif",
     fontWeight: "600",
     lineHeight: 24,
     color: "rgba(255, 255, 255, 1)",
@@ -179,7 +153,6 @@ const styles = StyleSheet.create({
   },
   Txt605: {
     fontSize: 14,
-    fontFamily: "Inter, sans-serif",
     fontWeight: "600",
     lineHeight: 24,
     color: "rgba(255, 255, 255, 1)",

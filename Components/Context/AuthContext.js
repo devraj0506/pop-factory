@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
  import axios from 'axios'; 
- import React, {createContext, useEffect, useState} from 'react'; 
+ import React, {createContext, useEffect, useState, useRef} from 'react'; 
   
   
  export const AuthContext = createContext(); 
@@ -9,15 +9,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
    const [userInfo, setUserInfo] = useState({}); 
 const [Loading, setLoading] = useState(false) 
    const [splashLoading, setSplashLoading] = useState(false); 
-  
-  
+  const latestValue = useRef(Loading)
+     
    const login = (email, password) => {
+        
      console.log("started")
+     console.log(latestValue.current)
+     
+setLoading(Loading => {
+  latestValue.current = !Loading;
+  return !Loading;
+})
      console.log(Loading)
-setLoading(true)
-     console.log(Loading)
+     console.log(`latest value is ${latestValue.current}`)
   
-     axios 
+      axios 
        .post("https://factory-fuel.herokuapp.com/admin/login", { 
          username:email, 
          password, 
@@ -32,14 +38,22 @@ setLoading(true)
          }
          setUserInfo(userInfo); 
          AsyncStorage.setItem('userInfo', JSON.stringify(userInfo)); 
-setLoading(false); 
+setLoading(Loading => {
+  latestValue.current = !Loading;
+  return !Loading;
+})
        }) 
        .catch(res => { 
          console.log(`login error ${res}`); 
          alert(res)
- setLoading(true); 
+setLoading(Loading => {
+  latestValue.current = !Loading;
+  return !Loading;
+})
        }); 
+      
    };
+  
    
    const Logout=()=>{
      AsyncStorage.removeItem('userInfo')
@@ -73,9 +87,11 @@ setLoading(false);
    return ( 
  <AuthContext.Provider 
        value={{ 
-         Loading, 
+         Loading,
+         setLoading,
          userInfo,
          setUserInfo,
+         latestValue,
          splashLoading,
          Logout,
          login, 

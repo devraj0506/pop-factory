@@ -32,7 +32,7 @@ import React, {useContext} from 'react';
  <Stack.Navigator screenOptions={{
     headerShown: false
   }}> 
- {userInfo.success==true ? (
+ {userInfo.type=="ADMIN" ? (
  <>
  <Stack.Screen 
  name="Admin" 
@@ -48,7 +48,21 @@ import React, {useContext} from 'react';
  name="Vehicle" 
  component={Vehicle} />
  </>
- ):( 
+ ): userInfo.type=="FUEL" ? (
+   <>
+   <Stack.Screen 
+ name="Diesel" 
+ component={Diesel} />
+   </>
+   ): userInfo.type=="FACTORY" ? (
+     <>
+      <Stack.Screen 
+ name="Factory" 
+ component={Factory} />
+     </>
+     )
+ :
+ ( 
 <>
 <Stack.Screen 
 name="Login" 
