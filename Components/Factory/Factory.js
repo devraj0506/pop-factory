@@ -4,10 +4,10 @@ import {AuthContext} from '../Context/AuthContext';
 
 const Factory=({route, navigation})=>{
   const {Logout} = useContext(AuthContext); 
-    const {id}=route.params
+    
   return(
     <>
-    <Text>id: {id}</Text>
+    <Text>Rakesh</Text>
      <Button title="logout" onPress={Logout} />
     </>
     )

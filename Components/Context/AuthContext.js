@@ -61,6 +61,40 @@ setLoading(Loading => {
      console.log("Logged out")
    }
   
+  
+    const register = (name, email, password,username,type) => { 
+    setLoading(Loading => {
+  latestValue.current = !Loading;
+  return !Loading;
+})
+  
+     axios 
+       .post("https://factory-fuel.herokuapp.com/admin/createOperator", { 
+         name, 
+         email, 
+         password,
+         username,
+         type
+       }) 
+       .then(res => { 
+   console.log(res.data)
+   alert(res.data.message)
+setLoading(Loading => {
+  latestValue.current = !Loading;
+  return !Loading;
+})
+       }) 
+       .catch(e => { 
+         console.log(`register error ${e}`); 
+        setLoading(Loading => {
+  latestValue.current = !Loading;
+  return !Loading;
+})
+       }); 
+   };
+  
+  
+  
   
    const isLoggedIn = async () => { 
      try { 
@@ -94,7 +128,8 @@ setLoading(Loading => {
          latestValue,
          splashLoading,
          Logout,
-         login, 
+         login,
+         register,
        }}> 
  {children} 
  </AuthContext.Provider> 

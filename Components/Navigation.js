@@ -9,6 +9,7 @@ import React, {useContext} from 'react';
  import Diesel from './Diesel/Diesel'
  import Factory from './Factory/Factory'
  import Vehicle from './Vehicle/Vehicle'
+  import CreateOperator from './Admin/CreateOperator'
   
  const Stack = createNativeStackNavigator(); 
   
@@ -47,6 +48,10 @@ import React, {useContext} from 'react';
  <Stack.Screen 
  name="Vehicle" 
  component={Vehicle} />
+ <Stack.Screen 
+ name="CreateOperator" 
+ component={CreateOperator} />
+ 
  </>
  ): userInfo.type=="FUEL" ? (
    <>

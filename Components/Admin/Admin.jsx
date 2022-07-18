@@ -31,6 +31,9 @@ export default function WelcomePageAdmin({navigation}) {
           <Pressable onPress={()=>navigation.navigate('Vehicle')} style={styles.Frame2}>
             <Text style={styles.Txt605}>Vehicle</Text>
           </Pressable>
+          <Pressable onPress={()=>navigation.navigate('CreateOperator')} style={styles.Frame2}>
+            <Text style={styles.Txt605}>Create Operator</Text>
+          </Pressable>
         </View>
       </View>
     </View>
